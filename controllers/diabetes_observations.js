@@ -1,31 +1,17 @@
 const bodyParser = require("body-parser");
 const client = require("../db/connection.js");
 const { ObjectId } = require("mongodb");
+const {
+  getRandomSingleObservation,
+  saveSingleObservationPrediction,
+} = require("../services/diabetes_observations.js");
 
 const database = client.db("diabetes_db");
 const diabetesCollection = database.collection("diabetes_csv");
 
-const setStatusForSingleObservation = async (id, status) => {
-  const filter = { _id: new ObjectId(id) };
-
-  const updateObservation = {
-    $set: {
-      status: status,
-    },
-  };
-
-  await diabetesCollection.updateOne(filter, updateObservation);
-};
-
-const getRandomSingleObservation = async (req, res) => {
+const getRandomSingleObservationController = async (req, res) => {
   try {
-    console.log("hit");
-
-    const query = { status: undefined };
-    const observation = await diabetesCollection.findOne(query);
-
-    //set the status property of the document "active", thus the document can only be updated if its "active"
-    await setStatusForSingleObservation(observation._id, "active");
+    const observation = await getRandomSingleObservation();
 
     res.status(200).json(observation);
   } catch (error) {
@@ -35,42 +21,26 @@ const getRandomSingleObservation = async (req, res) => {
   }
 };
 
-const saveSingleObservationPrediction = async (req, res) => {
+const saveSingleObservationPredictionController = async (req, res) => {
   try {
-    console.log(req.body);
-    const observation = await diabetesCollection.findOne({
-      _id: new ObjectId(req.body.objectId),
-    });
-
-    if (observation?.status != "active") {
-      res
-        .status(404)
-        .json({ error: "Error! Status is not active for the observation" });
-      return;
-    }
-
-    const filter = { _id: new ObjectId(req.body.objectId) };
-    const updateObservation = {
-      $set: {
-        status: "fetched",
-        prediction: req.body.prediction,
-      },
-    };
-
-    await diabetesCollection.updateOne(filter, updateObservation);
+    saveSingleObservationPrediction(
+      req.body.objectId,
+      req.body.prediction,
+      req.body.userInfo
+    );
     res.status(200).json({ success: true });
   } catch (err) {
     res.status(404).json({ success: false });
   }
 };
 
-const getConfig = async (req, res) => {
-  const diabetesConfig = require("./diabetes_config.json");
+const getConfigController = async (req, res) => {
+  const diabetesConfig = require("../models/diabetes_config.json");
   res.status(200).json(diabetesConfig);
 };
 
 module.exports = {
-  getRandomSingleObservation,
-  getConfig,
-  saveSingleObservationPrediction,
+  getRandomSingleObservationController,
+  getConfigController,
+  saveSingleObservationPredictionController,
 };

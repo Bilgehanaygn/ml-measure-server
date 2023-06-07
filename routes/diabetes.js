@@ -1,14 +1,14 @@
 const express = require("express");
 const {
-  getRandomSingleObservation,
-  getConfig,
-  saveSingleObservationPrediction,
+  getRandomSingleObservationController,
+  getConfigController,
+  saveSingleObservationPredictionController,
 } = require("../controllers/diabetes_observations.js");
 
 const router = express.Router();
 
-router.get("/", getRandomSingleObservation);
-router.get("/config", getConfig);
-router.post("/", saveSingleObservationPrediction);
+router.get("/", getRandomSingleObservationController);
+router.get("/config", getConfigController);
+router.post("/", saveSingleObservationPredictionController);
 
 module.exports = router;
