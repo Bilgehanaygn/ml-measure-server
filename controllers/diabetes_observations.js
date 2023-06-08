@@ -1,13 +1,8 @@
 const bodyParser = require("body-parser");
-const client = require("../db/connection.js");
-const { ObjectId } = require("mongodb");
 const {
   getRandomSingleObservation,
   saveSingleObservationPrediction,
 } = require("../services/diabetes_observations.js");
-
-const database = client.db("diabetes_db");
-const diabetesCollection = database.collection("diabetes_csv");
 
 const getRandomSingleObservationController = async (req, res) => {
   try {
