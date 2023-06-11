@@ -16,7 +16,7 @@ npm run dev
 
 
 ### Notes: 
-specify the port in the index.js file port 5000 is recommended, as it is the base URL in the front-end application. If you run the application in a different port make sure to update the base url in the front-end application as well.
+Make sure to specify the port in the index.js file port 5000 is recommended, as it is the base URL in the front-end application. If you run the application in a different port make sure to update the base url in the front-end application as well.
 
 ## Alternative way to setup the application - Build with docker 
 ### Run the following command
