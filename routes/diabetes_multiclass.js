@@ -3,7 +3,7 @@ const {
   getRandomSingleObservationController,
   getConfigController,
   saveSingleObservationPredictionController,
-} = require("../controllers/diabetes.js");
+} = require("../controllers/diabetes_multiclass.js");
 
 const router = express.Router();
 

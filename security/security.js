@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 function generateRandomString(length) {
   let result = "";
   const characters =
@@ -11,13 +11,13 @@ function generateRandomString(length) {
     counter += 1;
   }
   return result;
-};
+}
 
 async function sendEmail() {
   try {
     // E-posta göndermek için kullanacağınız e-posta hesap bilgilerini girin
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
+      host: "smtp.gmail.com",
       port: 587,
       secure: false,
       requireTLS: true,
@@ -47,6 +47,21 @@ async function sendEmail() {
   } catch (error) {
     console.error("E-posta gönderme hatası:", error);
   }
+}
+
+const encryptForMail = function (mail) {
+  const token = jwt.sign("mailt7849@gmail.com", process.env.TEMP_SECRET_KEY);
+  return token;
 };
 
-module.exports = sendEmail
+const verifyToken = function (token) {
+  if (!token) {
+    throw "token is not presented";
+  }
+  const decoded = jwt.verify(token, process.env.TEMP_SECRET_KEY);
+  if (decoded !== "mailt7849@gmail.com") {
+    throw "token is invalid";
+  }
+};
+
+module.exports = { encryptForMail, verifyToken };

@@ -10,13 +10,8 @@
     "type": "binary",
     "in_transformer": true,
     "out_transformer": true,
-    "values": [
-      "Diabetes",
-      "Non-diabetes2",
-      "Non-diabetes3",
-      "Non-diabetes4",
-      "Non-diabetes5"
-    ]
+    "question": "Does the patient has diabetes?",
+    "values": ["Diabetes", "Non-diabetes"]
   },
   "features": [
     {
