@@ -27,4 +27,4 @@ docker run <image_name> -p 5000:5000
 
 
 ### Receive an invitation mail
-Make a GET request to http://localhost:5000/invite?dataset=diabetes&mail=<mailAddressYouWantToGetTheInvitation>
+Make a GET request to http://localhost:5000/invite?dataset=diabetes&mail={mailAddressYouWantToGetTheInvitation}
