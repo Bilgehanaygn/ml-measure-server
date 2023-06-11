@@ -22,4 +22,5 @@ specify the port in the index.js file port 5000 is recommended, as it is the bas
 ### Run the following command
 
 docker build -t <image_name> .
+
 docker run <image_name> -p 5000:5000
