@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
-const { encryptForMail } = require("../security/security.js");
+const { encryptForMail, sendEmail } = require("../security/security.js");
 
-const inviteByMailController = function (req, res) {
+const inviteByMailController = async function (req, res) {
   try {
-    const mail = req.params.mail;
-    const token = encryptForMail(mail);
+    const mail = req.query.mail;
+    const dataset = req.query.dataset;
+    console.log(mail);
+    await sendEmail(mail, dataset);
 
-    res.status(200).send({ token });
+    res.status(200).send({ success: true });
   } catch (err) {
     res.status(500).send({ success: false });
   }

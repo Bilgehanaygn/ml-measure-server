@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+
+const mailList = [];
+
 function generateRandomString(length) {
   let result = "";
   const characters =
@@ -13,7 +16,7 @@ function generateRandomString(length) {
   return result;
 }
 
-async function sendEmail() {
+async function sendEmail(mail, dataset) {
   try {
     // E-posta göndermek için kullanacağınız e-posta hesap bilgilerini girin
     const transporter = nodemailer.createTransport({
@@ -22,23 +25,23 @@ async function sendEmail() {
       secure: false,
       requireTLS: true,
       auth: {
-        user: "ayberk.aygun07@gmail.com", // E-posta adresin
-        pass: "APP PASSWORD", //App şifren
+        user: "Bilgehanaygn@gmail.com", // E-posta adresin
+        pass: "houabagvyqoipvuf", //App şifren
       },
     });
 
-    // Rastgele şifrelenmiş dizeyi oluşturun
-    const randomString = generateRandomString(5);
-
     // Token oluşturun
-    const token = jwt.sign({ randomString }, "your_secret_key");
+    const token = encryptForMail(mail);
+
+    // tokenlar ve mailleri listeye alma
+    mailList.push(mail);
 
     // E-posta ayarlarınızı ve içeriğinizi düzenleyin
     const mailOptions = {
-      from: "ayberk.aygun07@gmail.com", // Gönderen e-posta adresi
-      to: "ayberk.aygun127@gmail.com", // Alıcı e-posta adresi
+      from: "Bilgehanaygn@gmail.com", // Gönderen e-posta adresi
+      to: "Bilgehanaygn@gmail.com", // Alıcı e-posta adresi
       subject: "ML Measure Project Token Link", // E-posta konusu
-      text: `Aşağıdaki bağlantıyı kullanarak giriş yapınız: http://localhost:3000/measure/token=${token}`, // E-posta içeriği (metin formatı)
+      text: `Aşağıdaki bağlantıyı kullanarak giriş yapınız: http://localhost:3000/measure?dataset=${dataset}&authToken=${token}`, // E-posta içeriği (metin formatı)
     };
 
     // E-postayı gönder
@@ -50,7 +53,7 @@ async function sendEmail() {
 }
 
 const encryptForMail = function (mail) {
-  const token = jwt.sign("mailt7849@gmail.com", process.env.TEMP_SECRET_KEY);
+  const token = jwt.sign(mail, process.env.TEMP_SECRET_KEY);
   return token;
 };
 
@@ -59,9 +62,9 @@ const verifyToken = function (token) {
     throw "token is not presented";
   }
   const decoded = jwt.verify(token, process.env.TEMP_SECRET_KEY);
-  if (decoded !== "mailt7849@gmail.com") {
+  if (!mailList.includes(decoded)) {
     throw "token is invalid";
   }
 };
 
-module.exports = { encryptForMail, verifyToken };
+module.exports = { encryptForMail, verifyToken, sendEmail };
