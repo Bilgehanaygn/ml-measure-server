@@ -25,8 +25,8 @@ async function sendEmail(mail, dataset) {
       secure: false,
       requireTLS: true,
       auth: {
-        user: "Bilgehanaygn@gmail.com", // E-posta adresin
-        pass: "houabagvyqoipvuf", //App şifren
+        user: "testm5691@gmail.com", // E-posta adresin
+        pass: "czelibeimwbknyjz", //App şifren
       },
     });
 
@@ -38,8 +38,8 @@ async function sendEmail(mail, dataset) {
 
     // E-posta ayarlarınızı ve içeriğinizi düzenleyin
     const mailOptions = {
-      from: "Bilgehanaygn@gmail.com", // Gönderen e-posta adresi
-      to: "Bilgehanaygn@gmail.com", // Alıcı e-posta adresi
+      from: "testm5691@gmail.com", // Gönderen e-posta adresi
+      to: "testm5691@gmail.com", // Alıcı e-posta adresi
       subject: "ML Measure Project Token Link", // E-posta konusu
       text: `Aşağıdaki bağlantıyı kullanarak giriş yapınız: http://localhost:3000/measure?dataset=${dataset}&authToken=${token}`, // E-posta içeriği (metin formatı)
     };
