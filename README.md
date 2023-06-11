@@ -1,16 +1,15 @@
 # ml-measure-server
 
-Installation and Setup
+# Installation and Setup
 
 
 ## For local setup node version 18 or higher is recommended.
 
-1.
-git clone https://github.com/Bilgehanaygn/ml-measure-server.git
+### 1. git clone https://github.com/Bilgehanaygn/ml-measure-server.git
 
-2.
-### In the project directory run the following commands, specify the port in the index.js file port 5000 is recommended, as it is the base URL in the front-end application.
-### If you run the application in a different port make sure to update the base url in the front-end application as well.
+
+In the project directory run the following commands, specify the port in the index.js file port 5000 is recommended, as it is the base URL in the front-end application. If you run the application in a different port make sure to update the base url in the front-end application as well.
+### 2. 
 
 npm install
 npm run dev
