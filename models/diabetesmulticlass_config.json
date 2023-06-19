@@ -1,42 +1,39 @@
 {
   "presentation": {
-    "title": "Diabetes Prediction Model",
-    "subtitle": "Estimates if a patient has diabetes based on certain parameters.",
-    "help_text": "Populate the fields below to make use of the model."
+    "title": "Diabetes Prediction Model"
   },
   "model": {
     "name": "diabetes_model_multiclass",
     "description": "Estimates if a patient has diabetes based on certain parameters.",
     "type": "multi-class",
-    "in_transformer": true,
-    "out_transformer": false,
     "question": "Select the patients diabetes level.",
-    "values": ["Non-Diabetes", "Pre-Diabetes", "Diabetes"]
+    "values": [
+      { "label": "Non-Diabetes", "value": 0 },
+      { "label": "Pre-Diabetes", "value": 1 },
+      { "label": "Diabetes", "value": 2 }
+    ]
   },
   "features": [
     {
       "name": "Does the patient have high blood pressure?",
       "data_label": "HighBP",
       "description": "Have high blood pressure?",
-      "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "type": "checkbox",
+      "values": ["No", "Yes"]
     },
     {
       "name": "Does the patient have high cholesterol?",
       "data_label": "HighCol",
       "description": "Have high cholesterol?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "Has the patient had a cholesterol check in the past 5 years?",
       "data_label": "CholCheck",
       "description": "Had cholesterol check past 5 years?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "BMI",
@@ -44,88 +41,77 @@
       "description": "Body mass index.",
       "type": "numeric",
       "from": 12,
-      "to": 98,
-      "default_value": 12
+      "to": 98
     },
     {
       "name": "Is the patient a smoker?",
       "data_label": "Smoker",
       "description": "Is a smoker?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "Has the patient ever had a stroke?",
       "data_label": "Stroke",
       "description": "Has ever had stroke?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "Has the patient suffered from CHD or MI?",
       "data_label": "HeartDiseaseorAttack",
       "description": "Suffered from CHD or MI?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "Has the patient been physically active in the past 30 days?",
       "data_label": "PhysActivity",
       "description": "Was physically active past 30 days?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "Does the patient consume fruit daily?",
       "data_label": "Fruits",
       "description": "Consumes fruit daily?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "Does the patient consume vegetables daily?",
       "data_label": "Veggies",
       "description": "Consumes vegetables daily?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "Is the patient a heavy drinker?",
       "data_label": "HvyAlcoholConsump",
       "description": "Is heavy drinker?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "Does the patient have medical coverage?",
       "data_label": "AnyHealthcare",
       "description": "Has medical coverage?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "Was the patient unable to visit a doctor due to expenses?",
       "data_label": "NoDocbcCost",
       "description": "Unable to visit a doctor due to expenses?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "No"
+      "values": ["No", "Yes"]
     },
     {
       "name": "General health of patient?",
       "data_label": "GenHlth",
       "description": "General health",
       "type": "single-select",
-      "values": ["Poor", "Fair", "Good", "Very Good", "Excellent"],
-      "default_value": "Good"
+      "values": ["Poor", "Fair", "Good", "Very Good", "Excellent"]
     },
     {
       "name": "For how many days has the patient suffered mental health problems in the past 30 days?",
@@ -133,8 +119,7 @@
       "description": "Num of mental health issues past 30 days",
       "type": "numeric",
       "from": 0,
-      "to": 30,
-      "default_value": 1
+      "to": 30
     },
     {
       "name": "For how many days has the patient suffered pyhsical health problems in the past 30 days?",
@@ -142,33 +127,29 @@
       "description": "Num of physical health problems past 30 days",
       "type": "numeric",
       "from": 0,
-      "to": 30,
-      "default_value": 1
+      "to": 30
     },
     {
       "name": "Does the patient have serious difficulty walking?",
       "data_label": "DiffWalk",
       "description": "Has serious walking difficulty?",
       "type": "single-select",
-      "values": ["No", "Yes"],
-      "default_value": "Yes"
+      "values": ["No", "Yes"]
     },
     {
       "name": "Sex.",
       "data_label": "Sex",
       "description": "Sex.",
-      "type": "single-select",
-      "values": ["Female", "Male"],
-      "default_value": "Female"
+      "type": "radio-buttons",
+      "values": ["Female", "Male"]
     },
     {
       "name": "Age",
       "data_label": "Age",
       "description": "Age.",
-      "type": "numeric",
+      "type": "text-field",
       "from": 7,
-      "to": 99,
-      "default_value": 30
+      "to": 99
     },
     {
       "name": "Education level.",
@@ -182,8 +163,7 @@
         "High school graduate",
         "Some college or technical school",
         "College graduate"
-      ],
-      "default_value": "Elementary"
+      ]
     },
     {
       "name": "Income.",
@@ -199,15 +179,7 @@
         "Around $50,000",
         "Around $75,000",
         "$100,000 or More"
-      ],
-      "default_value": "Less Than $35,000"
+      ]
     }
-  ],
-  "target": {
-    "name": "Diabetes",
-    "description": "The patient has diabetes by model estimations.",
-    "type": "numeric",
-    "message_format": "Does the patient suffer of diabetes? Yes(2) No(0) Prediabetes(1): {} - {}% certain.",
-    "include_certain": true
-  }
+  ]
 }

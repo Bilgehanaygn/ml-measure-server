@@ -7,9 +7,8 @@ const { verifyToken } = require("../security/security.js");
 
 const getRandomSingleObservationController = async (req, res) => {
   try {
-    verifyToken(req.headers["authorization"]);
+    // verifyToken(req.headers["authorization"]);
     const observation = await getRandomSingleObservation();
-
     res.status(200).json(observation);
   } catch (error) {
     res.status(500).json({
@@ -28,7 +27,7 @@ const saveSingleObservationPredictionController = async (req, res) => {
     );
     res.status(200).json({ success: true });
   } catch (err) {
-    res.status(404).json({ success: false });
+    res.status(500).json({ success: false });
   }
 };
 
@@ -37,8 +36,13 @@ const getConfigController = async (req, res) => {
   res.status(200).json(diabetesConfig);
 };
 
+const getAnalyticsController = async (req, res) => {
+  res.status(200).json({ total: 100, match: 75, fail: 25 });
+};
+
 module.exports = {
   getRandomSingleObservationController,
   getConfigController,
   saveSingleObservationPredictionController,
+  getAnalyticsController,
 };

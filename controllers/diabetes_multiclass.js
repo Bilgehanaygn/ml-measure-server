@@ -6,11 +6,12 @@ const { verifyToken } = require("../security/security.js");
 
 const getRandomSingleObservationController = async (req, res) => {
   try {
-    verifyToken(req.headers["authorization"]);
+    // verifyToken(req.headers["authorization"]);
     const observation = await getRandomSingleObservation();
 
     res.status(200).json(observation);
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: error.message,
     });

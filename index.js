@@ -1,29 +1,25 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const dotenv = require("dotenv").config({ path: "./.env" });
-const diabetesRoute = require("./routes/diabetes.js");
-const diabetesMulticlassRoute = require("./routes/diabetes_multiclass.js");
-const inviteRoute = require("./routes/invite.js");
+const cluster = require("node:cluster");
+const { cpus } = require("node:os");
+const process = require("node:process");
 
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+const numCPUs = cpus().length;
 
-app.get("/", async (req, res) => {
-  res.send("is working fine");
-});
+if (cluster.isPrimary) {
+  console.log(`Primary ${process.pid} is running`);
 
-app.use("/diabetes", diabetesRoute);
-app.use("/diabetes_multiclass", diabetesMulticlassRoute);
-app.use("/invite", inviteRoute);
+  // Fork workers.
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
 
-const PORT = process.env.PORT || 5000;
+  cluster.on("exit", (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} died`);
+    cluster.fork();
+  });
+} else {
+  // Workers can share any TCP connection
+  // In this case it is an HTTP server
+  require("./server.js");
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
-
-process.on("uncaughtException", function (error) {
-  console.log("Uncaught exception has been throwned.");
-});
+  console.log(`Worker ${process.pid} started`);
+}

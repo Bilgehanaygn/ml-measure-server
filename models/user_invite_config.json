@@ -1,0 +1,25 @@
+{
+  "possibleDatasets": ["diabetes", "diabetes_multiclass", "random_dataset"],
+  "userQuestions": [
+    {
+      "name": "YearOfExpertise",
+      "label": "Your year of expertise?",
+      "type": "numeric"
+    },
+    {
+      "name": "HospitalType",
+      "label": "You spend most of your career at:",
+      "type": "radio-buttons",
+      "values": [
+        { "label": "University Hospital", "value": "u" },
+        { "label": "State Hospital", "value": "s" },
+        { "label": "Private Hospital", "value": "p" }
+      ]
+    },
+    {
+      "name": "FirstLetterOfYourName",
+      "label": "Very first letter of your name",
+      "type": "text-field"
+    }
+  ]
+}

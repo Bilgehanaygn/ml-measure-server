@@ -1,17 +1,16 @@
 {
   "presentation": {
-    "title": "Diabetes Prediction Model",
-    "subtitle": "Based on provided parameters this model can provide an evaluation with regards to the patients likelihood to have diabetes.",
-    "help_text": "Populate the fields below to make use of the model."
+    "title": "Diabetes Prediction Model"
   },
   "model": {
     "name": "diabetes_model",
     "description": "Estimates if a patient has diabetes based on certain parameters.",
     "type": "binary",
-    "in_transformer": true,
-    "out_transformer": true,
     "question": "Does the patient has diabetes?",
-    "values": ["Diabetes", "Non-diabetes"]
+    "values": [
+      { "label": "Non-Diabetes", "value": 0 },
+      { "label": "Diabetes", "value": 1 }
+    ]
   },
   "features": [
     {
@@ -63,10 +62,5 @@
       "description": "Subjects age.",
       "type": "numeric"
     }
-  ],
-  "target": {
-    "name": "Diabetes",
-    "description": "The patient has diabetes by model estimations.",
-    "type": "numeric"
-  }
+  ]
 }
