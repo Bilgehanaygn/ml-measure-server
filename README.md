@@ -24,3 +24,7 @@ Make sure to specify the port in the index.js file port 5000 is recommended, as 
 docker build -t <image_name> .
 
 docker run <image_name> -p 5000:5000
+
+
+### Receive an invitation mail
+Make a GET request to http://localhost:5000/invite?dataset=diabetes&mail={mailAddressYouWantToGetTheInvitation}
