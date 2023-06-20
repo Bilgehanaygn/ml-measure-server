@@ -58,4 +58,31 @@ const getDatasetForUser = function (token) {
   return user.dataset;
 };
 
-module.exports = { encryptForMail, verifyToken, sendEmail, getDatasetForUser };
+const verifyAdmin = function (credential) {
+  if (
+    process.env.ADMIN_CREDENTIALS !==
+    jwt.verify(credential, process.env.TEMP_SECRET_KEY)
+  ) {
+    throw "admin credentials are not valid!";
+  }
+};
+
+const encryptAdminCredential = function (credential) {
+  if (credential !== process.env.ADMIN_CREDENTIALS) {
+    throw "admin credentials are not valid!";
+  }
+  const token = jwt.sign(
+    process.env.ADMIN_CREDENTIALS,
+    process.env.TEMP_SECRET_KEY
+  );
+  return token;
+};
+
+module.exports = {
+  encryptForMail,
+  verifyToken,
+  sendEmail,
+  getDatasetForUser,
+  encryptAdminCredential,
+  verifyAdmin,
+};

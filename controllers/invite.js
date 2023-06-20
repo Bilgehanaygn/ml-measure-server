@@ -1,8 +1,14 @@
 const jwt = require("jsonwebtoken");
-const { sendEmail, getDatasetForUser } = require("../security/security.js");
+const {
+  sendEmail,
+  getDatasetForUser,
+  verifyAdmin,
+  encryptAdminCredential,
+} = require("../security/security.js");
 
 const inviteByMailController = async function (req, res) {
   try {
+    verifyAdmin(req.query.adminToken);
     const mail = req.query.mail;
     const dataset = req.query.dataset;
     await sendEmail(mail, dataset);
@@ -28,7 +34,15 @@ const getDatasetForUserController = async function (req, res) {
     const dataset = getDatasetForUser(token);
     res.status(200).json({ dataset: dataset });
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ success: false });
+  }
+};
+
+const getAdminCredentialsController = async function (req, res) {
+  try {
+    const token = encryptAdminCredential(req.query.credentials);
+    res.status(200).send({ adminToken: token });
+  } catch (error) {
     res.status(500).send({ success: false });
   }
 };
@@ -37,4 +51,5 @@ module.exports = {
   inviteByMailController,
   getUserInviteConfigController,
   getDatasetForUserController,
+  getAdminCredentialsController,
 };
